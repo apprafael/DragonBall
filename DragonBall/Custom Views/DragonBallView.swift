@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DragonBall: View {
+struct DragonBallView: View {
     @State private var value = 1.0
     var body: some View {
         Circle()
@@ -22,6 +22,6 @@ struct DragonBall: View {
 
 struct DragonBall_Previews: PreviewProvider {
     static var previews: some View {
-        DragonBall()
+        DragonBallView()
     }
 }

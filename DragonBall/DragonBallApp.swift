@@ -11,7 +11,7 @@ import SwiftUI
 struct DragonBallApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DragonRadarView()
         }
     }
 }

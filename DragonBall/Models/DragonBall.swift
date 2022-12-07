@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct DragonBall: Identifiable {
+    let id = UUID()
+    let positionX: Int
+    let positionY: Int
+}
