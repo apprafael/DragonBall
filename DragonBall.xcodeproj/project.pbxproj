@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		26D99E8B2947B229003E4A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		26EDED87293FC29600487FAD /* DragonBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DragonBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26EDED8A293FC29600487FAD /* DragonBallApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallApp.swift; sourceTree = "<group>"; };
 		26EDED8C293FC29600487FAD /* DragonRadarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonRadarView.swift; sourceTree = "<group>"; };
@@ -106,6 +107,7 @@
 		26EDED89293FC29600487FAD /* DragonBall */ = {
 			isa = PBXGroup;
 			children = (
+				26D99E8B2947B229003E4A50 /* Info.plist */,
 				26EDEDC62940346500487FAD /* Models */,
 				26EDEDC5294033FC00487FAD /* Shapes */,
 				26EDEDC42940338700487FAD /* Custom Views */,
@@ -468,6 +470,7 @@
 				DEVELOPMENT_TEAM = 582V3HX479;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DragonBall/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -498,6 +501,7 @@
 				DEVELOPMENT_TEAM = 582V3HX479;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DragonBall/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
