@@ -10,7 +10,7 @@ import CoreLocation
 
 class DragonRadarViewModel: NSObject, ObservableObject {
     private var locationManager: CLLocationManager?
-    var dragonBalls = [DragonBall]()
+    @Published var dragonBalls = [DragonBall]()
     
     override init() {
         super.init()
@@ -18,14 +18,20 @@ class DragonRadarViewModel: NSObject, ObservableObject {
         locationManager?.requestAlwaysAuthorization()
         locationManager?.delegate = self
         locationManager?.startUpdatingHeading()
-        dragonBalls.append(DragonBall(positionX: 70, positionY: 300))
-        dragonBalls.append(DragonBall(positionX: -100, positionY: 70))
-        dragonBalls.append(DragonBall(positionX: 100, positionY: -60))
+        dragonBalls.append(DragonBall(positionY: 300, degree: 0))
+        dragonBalls.append(DragonBall(positionY: 70, degree: 0))
+        dragonBalls.append(DragonBall( positionY: -60, degree: 0))
+    }
+
+    func changeDragonsBallsPosition(direction: CLLocationDirection) {
+        for index in dragonBalls.indices {
+            dragonBalls[index].degree = direction
+        }
     }
 }
 
 extension DragonRadarViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        print(newHeading.magneticHeading)
+        changeDragonsBallsPosition(direction: newHeading.magneticHeading)
     }
 }

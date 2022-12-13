@@ -10,7 +10,7 @@ import AVKit
 
 struct DragonRadarView: View {
     @State var audioPlayer: AVAudioPlayer!
-    var viewModel = DragonRadarViewModel()
+    @StateObject var viewModel = DragonRadarViewModel()
     var body: some View {
         ZStack(alignment: .center) {
             Color(.black)
@@ -33,7 +33,9 @@ struct DragonRadarView: View {
                 
             ForEach(viewModel.dragonBalls) { dragonBall in
                 DragonBallView()
-                    .offset(x: CGFloat(dragonBall.positionX), y: CGFloat(dragonBall.positionY))
+                    .offset(y: CGFloat(dragonBall.positionY))
+                    .rotationEffect(.degrees(-dragonBall.degree))
+                
             }
         }
         .onAppear {
