@@ -6,24 +6,24 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import DragonBall
 
 final class DragonBallTests: XCTestCase {
+    var dragonRadarViewModel: DragonRadarViewModel?
 
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        dragonRadarViewModel = DragonRadarViewModel()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        dragonRadarViewModel = nil
     }
 
     func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+        let location = CLLocation(latitude: 180.00000000000000, longitude: 180.00000000000000)
+        dragonRadarViewModel?.setupDragonBalls(userLocation: location)
+        XCTAssertNotEqual(dragonRadarViewModel?.dragonBalls.first?.location.coordinate.latitude, dragonRadarViewModel?.dragonBalls.last?.location.coordinate.latitude)
     }
 
     func testPerformanceExample() throws {
