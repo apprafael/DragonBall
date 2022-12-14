@@ -14,19 +14,28 @@ class DragonRadarViewModel: NSObject, ObservableObject {
     
     override init() {
         super.init()
-        locationManager = CLLocationManager()
-        locationManager?.requestAlwaysAuthorization()
-        locationManager?.delegate = self
-        locationManager?.startUpdatingHeading()
-        dragonBalls.append(DragonBall(positionY: 300, degree: 0))
-        dragonBalls.append(DragonBall(positionY: 70, degree: 0))
-        dragonBalls.append(DragonBall( positionY: -60, degree: 0))
+        setupLocationManager()
+        setupDragonBalls()
     }
 
     func changeDragonsBallsPosition(direction: CLLocationDirection) {
         for index in dragonBalls.indices {
             dragonBalls[index].degree = direction
         }
+    }
+
+    private func setupLocationManager() {
+        locationManager = CLLocationManager()
+        locationManager?.requestAlwaysAuthorization()
+        locationManager?.delegate = self
+        locationManager?.startUpdatingHeading()
+        locationManager?.startUpdatingLocation()
+    }
+
+    private func setupDragonBalls() {
+        dragonBalls.append(DragonBall(positionY: 300, degree: 0))
+        dragonBalls.append(DragonBall(positionY: 70, degree: 0))
+        dragonBalls.append(DragonBall( positionY: -60, degree: 0))
     }
 }
 
