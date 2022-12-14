@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct DragonBall: Identifiable {
     let id = UUID()
-    let positionY: Int
+    let location: CLLocation
+    var positionY: Int
     var degree: Double
 }

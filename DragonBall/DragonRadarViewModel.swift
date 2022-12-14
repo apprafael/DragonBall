@@ -11,14 +11,18 @@ import CoreLocation
 class DragonRadarViewModel: NSObject, ObservableObject {
     private var locationManager: CLLocationManager?
     @Published var dragonBalls = [DragonBall]()
+    private var coordinatesVariation: Double {
+        get {
+            return Double.random(in: -0.099999999999999...0.099999999999999)
+        }
+    }
     
     override init() {
         super.init()
         setupLocationManager()
-        setupDragonBalls()
     }
 
-    func changeDragonsBallsPosition(direction: CLLocationDirection) {
+    private func changeDragonsBallsPosition(direction: CLLocationDirection) {
         for index in dragonBalls.indices {
             dragonBalls[index].degree = direction
         }
@@ -32,10 +36,24 @@ class DragonRadarViewModel: NSObject, ObservableObject {
         locationManager?.startUpdatingLocation()
     }
 
-    private func setupDragonBalls() {
-        dragonBalls.append(DragonBall(positionY: 300, degree: 0))
-        dragonBalls.append(DragonBall(positionY: 70, degree: 0))
-        dragonBalls.append(DragonBall( positionY: -60, degree: 0))
+    private func setupDragonBalls(userLocation: CLLocation) {
+        if !dragonBalls.isEmpty { return }
+        for _ in 0...3 {
+            let dragonBallLat = userLocation.coordinate.latitude + coordinatesVariation
+            let dragonBallLong = userLocation.coordinate.longitude + coordinatesVariation
+            let dragonBallLocation = CLLocation(latitude: dragonBallLat, longitude: dragonBallLong)
+            dragonBalls.append(DragonBall(location: dragonBallLocation,positionY: 300, degree: 0))
+        }
+    }
+
+    private func updateDragonBallsDistance(userLocation: CLLocation) {
+
+        
+        for (index, dragonBall) in dragonBalls.enumerated() {
+            var distance = Int(dragonBall.location.distance(from: userLocation)/10)
+            distance = distance > 300 ? 300 : distance
+            dragonBalls[index].positionY = distance
+        }
     }
 }
 
@@ -45,7 +63,8 @@ extension DragonRadarViewModel: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+        guard let userLocation = manager.location else { return }
+        setupDragonBalls(userLocation: userLocation)
+        updateDragonBallsDistance(userLocation: userLocation)
     }
 }
