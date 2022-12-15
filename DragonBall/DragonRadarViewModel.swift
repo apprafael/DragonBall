@@ -15,12 +15,14 @@ class DragonRadarViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
         setupLocationManager()
+        locationManager?.startUpdatingLocation()
         setupDragonBalls(userLocation: locationManager?.location)
+        locationManager?.startUpdatingHeading()
     }
 
-    private func changeDragonsBallsPosition(direction: CLLocationDirection) {
+    private func updateDragonsBalls(direction: CLLocationDirection) {
         for index in dragonBalls.indices {
-            dragonBalls[index].degree = direction
+            dragonBalls[index].direction = direction
         }
     }
 
@@ -28,32 +30,30 @@ class DragonRadarViewModel: NSObject, ObservableObject {
         locationManager = CLLocationManager()
         locationManager?.requestAlwaysAuthorization()
         locationManager?.delegate = self
-        locationManager?.startUpdatingHeading()
-        locationManager?.startUpdatingLocation()
     }
 
     func setupDragonBalls(userLocation: CLLocation?) {
         guard let userLocation = userLocation else { return }
-        for _ in 0...6 {
-            let dragonBallLat = userLocation.coordinate.latitude + Double.random(in: -0.099999999999999...0.099999999999999)
-            let dragonBallLong = userLocation.coordinate.longitude + Double.random(in: -0.099999999999999...0.099999999999999)
+        for _ in 1...6 {
+            let dragonBallLat = userLocation.coordinate.latitude + Double.random(in: -0.029999999999999...0.029999999999999)
+            let dragonBallLong = userLocation.coordinate.longitude + Double.random(in: -0.029999999999999...0.029999999999999)
             let dragonBallLocation = CLLocation(latitude: dragonBallLat, longitude: dragonBallLong)
-            dragonBalls.append(DragonBall(location: dragonBallLocation, positionY: 300, degree: 0))
+            let distance = Int(dragonBallLocation.distance(from: userLocation)/10)
+            dragonBalls.append(DragonBall(location: dragonBallLocation, distance: distance, direction: 0))
         }
     }
 
     private func updateDragonBallsDistance(userLocation: CLLocation) {
         for (index, dragonBall) in dragonBalls.enumerated() {
-            var distance = Int(dragonBall.location.distance(from: userLocation)/10)
-            distance = distance > 300 ? 300 : distance
-            dragonBalls[index].positionY = distance
+            let distance = Int(dragonBall.location.distance(from: userLocation)/10)
+            dragonBalls[index].distance = distance
         }
     }
 }
 
 extension DragonRadarViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        changeDragonsBallsPosition(direction: newHeading.magneticHeading)
+        updateDragonsBalls(direction: newHeading.magneticHeading)
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

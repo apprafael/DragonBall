@@ -33,8 +33,8 @@ struct DragonRadarView: View {
                 
             ForEach(viewModel.dragonBalls) { dragonBall in
                 DragonBallView()
-                    .offset(y: CGFloat(dragonBall.positionY))
-                    .rotationEffect(.degrees(-dragonBall.degree))
+                    .offset(y: CGFloat(dragonBall.distance))
+                    .rotationEffect(.degrees(-dragonBall.direction))
                 
             }
         }

@@ -20,10 +20,22 @@ final class DragonBallTests: XCTestCase {
         dragonRadarViewModel = nil
     }
 
-    func testExample() throws {
+    func testDragonBallsLocationSetup() throws {
         let location = CLLocation(latitude: 180.00000000000000, longitude: 180.00000000000000)
         dragonRadarViewModel?.setupDragonBalls(userLocation: location)
         XCTAssertNotEqual(dragonRadarViewModel?.dragonBalls.first?.location.coordinate.latitude, dragonRadarViewModel?.dragonBalls.last?.location.coordinate.latitude)
+    }
+
+    func testDragonBallsDistanceSetup() throws {
+        let location = CLLocation(latitude: 180.00000000000000, longitude: 180.00000000000000)
+        dragonRadarViewModel?.setupDragonBalls(userLocation: location)
+        XCTAssertNotEqual(dragonRadarViewModel?.dragonBalls.first?.distance, dragonRadarViewModel?.dragonBalls.last?.distance)
+    }
+
+    func testDragonBallsTally() throws {
+        let location = CLLocation(latitude: 180.00000000000000, longitude: 180.00000000000000)
+        dragonRadarViewModel?.setupDragonBalls(userLocation: location)
+        XCTAssertEqual(dragonRadarViewModel?.dragonBalls.count, 6)
     }
 
     func testPerformanceExample() throws {

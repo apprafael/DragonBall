@@ -13,7 +13,7 @@ struct DragonBallView: View {
         Circle()
             .fill(Color("dragonBall"))
             .frame(width: 30, height: 30)
-            .shadow(color: .orange, radius: 10)
+            .shadow(color: .yellow, radius: 10)
             .opacity(value)
             .animation(Animation.easeInOut(duration: 0.3).repeatForever(autoreverses: true))
             .onAppear { self.value = 0.0 }
