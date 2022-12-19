@@ -38,6 +38,14 @@ final class DragonBallTests: XCTestCase {
         XCTAssertEqual(dragonRadarViewModel?.dragonBalls.count, 6)
     }
 
+    func testGetingBearingBetweenTwoPoints1() {
+        let location = CLLocation(latitude: -22.904867005934157, longitude: -43.29844917824176)
+        let location2 = CLLocation(latitude: -28.000067005934157, longitude: -43.298513551254125)
+        let bearing = dragonRadarViewModel?.getBearingBetweenTwoPoints1(point1: location, point2: location2)
+        
+        XCTAssertTrue(!(bearing?.isZero ?? false))
+    }
+
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
