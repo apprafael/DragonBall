@@ -10,6 +10,7 @@ import CoreLocation
 
 class DragonRadarViewModel: NSObject, ObservableObject {
     private var locationManager: CLLocationManager?
+    @Published var magneticHeading: CLLocationDirection = CLLocationDirection()
     @Published var dragonBalls = [DragonBall]()
     
     override init() {
@@ -20,11 +21,9 @@ class DragonRadarViewModel: NSObject, ObservableObject {
         locationManager?.startUpdatingHeading()
     }
 
-//    private func updateDragonsBalls(direction: CLLocationDirection) {
-//        for index in dragonBalls.indices {
-//            dragonBalls[index].direction = direction
-//        }
-//    }
+    func updateDragonsBalls(userLocation: CLLocation, direction: CLLocationDirection) {
+        magneticHeading = direction
+    }
 
     private func setupLocationManager() {
         locationManager = CLLocationManager()
@@ -41,13 +40,21 @@ class DragonRadarViewModel: NSObject, ObservableObject {
             let distance = Int(dragonBallLocation.distance(from: userLocation)/10)
             dragonBalls.append(DragonBall(location: dragonBallLocation, distance: distance, direction: 0))
         }
+        
+//        let dragonBallLocation = CLLocation(latitude: -22.915125959747338, longitude: -43.2985108316035)
+//        var distance = Int(dragonBallLocation.distance(from: userLocation)/10)
+//        dragonBalls.append(DragonBall(location: dragonBallLocation, distance: distance, direction: 0))
+//        let dragonBallLocation2 = CLLocation(latitude:-22.900125959747338, longitude: -43.2985108316035)
+//        distance = Int(dragonBallLocation2.distance(from: userLocation)/10)
+//        dragonBalls.append(DragonBall(location: dragonBallLocation2, distance: distance, direction: 0))
     }
 
     private func updateDragonBallsDistance(userLocation: CLLocation) {
         for (index, dragonBall) in dragonBalls.enumerated() {
             let distance = Int(dragonBall.location.distance(from: userLocation)/10)
             dragonBalls[index].distance = distance
-            dragonBalls[index].direction = getBearingBetweenTwoPoints1(point1: userLocation, point2: dragonBall.location)
+            let dragonBallDirection = getBearingBetweenTwoPoints1(point1: userLocation, point2: dragonBall.location)
+            dragonBalls[index].direction = dragonBallDirection
         }
     }
 
@@ -74,7 +81,8 @@ class DragonRadarViewModel: NSObject, ObservableObject {
 
 extension DragonRadarViewModel: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        //updateDragonsBalls(direction: newHeading.magneticHeading)
+        guard let userLocation = manager.location else { return }
+        updateDragonsBalls(userLocation: userLocation, direction: newHeading.magneticHeading)
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

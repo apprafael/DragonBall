@@ -30,19 +30,20 @@ struct DragonRadarView: View {
             .ignoresSafeArea()
             
             UserPinView()
-                
+            
             ForEach(viewModel.dragonBalls) { dragonBall in
                 DragonBallView()
                     .offset(y: CGFloat(dragonBall.distance))
                     .rotationEffect(.degrees(-dragonBall.direction))
                 
             }
+            .rotationEffect(.degrees(-viewModel.magneticHeading))
         }
         .onAppear {
             let sound = Bundle.main.path(forResource: "bip", ofType: "mp3")
             self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
             self.audioPlayer.numberOfLoops = -1
-//            self.audioPlayer.play()
+            self.audioPlayer.play()
         }
     }
 }

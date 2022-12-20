@@ -46,6 +46,19 @@ final class DragonBallTests: XCTestCase {
         XCTAssertTrue(!(bearing?.isZero ?? false))
     }
 
+    func testUpdatingDirection() {
+        let dragonBallLocation = CLLocation(latitude: -22.915125959747338, longitude: -43.2985108316035)
+        dragonRadarViewModel?.dragonBalls.append(DragonBall(location: dragonBallLocation, distance: 10, direction: 0))
+                
+        let userLocation = CLLocation(latitude:-22.90492830354678, longitude: -43.29840148763982)
+        let diretion = 180.0
+        dragonRadarViewModel?.updateDragonsBalls(userLocation: userLocation, direction: diretion)
+        
+        if let diretion = dragonRadarViewModel?.dragonBalls.first?.direction {
+            XCTAssertGreaterThan(diretion, 170.0)
+        }
+    }
+
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
