@@ -9,8 +9,7 @@ import SwiftUI
 import AVKit
 
 struct DragonRadarView: View {
-    @State var audioPlayer: AVAudioPlayer!
-    @StateObject var viewModel = DragonRadarViewModel()
+    @StateObject var viewModel = DragonRadarViewModel(interactor: DragonBallRadarInteractor())
     var body: some View {
         ZStack(alignment: .center) {
             Color(.black)
@@ -26,7 +25,6 @@ struct DragonRadarView: View {
                     }
                 }
             }
-            .offset(x: -8, y: -10)
             .ignoresSafeArea()
             
             UserPinView()
@@ -34,16 +32,13 @@ struct DragonRadarView: View {
             ForEach(viewModel.dragonBalls) { dragonBall in
                 DragonBallView()
                     .offset(y: CGFloat(dragonBall.distance))
-                    .rotationEffect(.degrees(-dragonBall.direction))
+                    .rotationEffect(.degrees(dragonBall.direction))
                 
             }
-            .rotationEffect(.degrees(-viewModel.magneticHeading))
+            .rotationEffect(.degrees(viewModel.magneticHeading))
         }
         .onAppear {
-            let sound = Bundle.main.path(forResource: "bip", ofType: "mp3")
-            self.audioPlayer = try! AVAudioPlayer(contentsOf: URL(fileURLWithPath: sound!))
-            self.audioPlayer.numberOfLoops = -1
-            self.audioPlayer.play()
+            viewModel.viewDidInit()
         }
     }
 }

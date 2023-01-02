@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		261D036229561D9400911487 /* DragonBallRadarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D036129561D9400911487 /* DragonBallRadarInteractor.swift */; };
 		26EDED8B293FC29600487FAD /* DragonBallApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EDED8A293FC29600487FAD /* DragonBallApp.swift */; };
 		26EDED8D293FC29600487FAD /* DragonRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EDED8C293FC29600487FAD /* DragonRadarView.swift */; };
 		26EDED8F293FC29600487FAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26EDED8E293FC29600487FAD /* Assets.xcassets */; };
@@ -17,7 +18,6 @@
 		26EDEDB5293FCB1B00487FAD /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EDEDB4293FCB1B00487FAD /* Triangle.swift */; };
 		26EDEDB72940182200487FAD /* DragonRadarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EDEDB62940182200487FAD /* DragonRadarViewModel.swift */; };
 		26EDEDB929401D2900487FAD /* DragonBallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EDEDB829401D2900487FAD /* DragonBallView.swift */; };
-		26EDEDC1294028EA00487FAD /* bip.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26EDEDC0294028EA00487FAD /* bip.mp3 */; };
 		26EDEDC32940333300487FAD /* UserPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EDEDC22940333300487FAD /* UserPinView.swift */; };
 		26EDEDC82940347500487FAD /* DragonBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EDEDC72940347500487FAD /* DragonBall.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		261D036129561D9400911487 /* DragonBallRadarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallRadarInteractor.swift; sourceTree = "<group>"; };
 		26D99E8B2947B229003E4A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		26EDED87293FC29600487FAD /* DragonBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DragonBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26EDED8A293FC29600487FAD /* DragonBallApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallApp.swift; sourceTree = "<group>"; };
@@ -54,7 +55,6 @@
 		26EDEDB4293FCB1B00487FAD /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		26EDEDB62940182200487FAD /* DragonRadarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonRadarViewModel.swift; sourceTree = "<group>"; };
 		26EDEDB829401D2900487FAD /* DragonBallView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallView.swift; sourceTree = "<group>"; };
-		26EDEDC0294028EA00487FAD /* bip.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = bip.mp3; path = ../../../Downloads/bip.mp3; sourceTree = "<group>"; };
 		26EDEDC22940333300487FAD /* UserPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPinView.swift; sourceTree = "<group>"; };
 		26EDEDC72940347500487FAD /* DragonBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBall.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,10 +111,10 @@
 				26EDEDC62940346500487FAD /* Models */,
 				26EDEDC5294033FC00487FAD /* Shapes */,
 				26EDEDC42940338700487FAD /* Custom Views */,
-				26EDEDC0294028EA00487FAD /* bip.mp3 */,
 				26EDED8C293FC29600487FAD /* DragonRadarView.swift */,
 				26EDEDB62940182200487FAD /* DragonRadarViewModel.swift */,
 				26EDED8A293FC29600487FAD /* DragonBallApp.swift */,
+				261D036129561D9400911487 /* DragonBallRadarInteractor.swift */,
 				26EDED8E293FC29600487FAD /* Assets.xcassets */,
 				26EDED90293FC29600487FAD /* Preview Content */,
 			);
@@ -275,7 +275,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26EDEDC1294028EA00487FAD /* bip.mp3 in Resources */,
 				26EDED92293FC29600487FAD /* Preview Assets.xcassets in Resources */,
 				26EDED8F293FC29600487FAD /* Assets.xcassets in Resources */,
 			);
@@ -307,6 +306,7 @@
 				26EDED8D293FC29600487FAD /* DragonRadarView.swift in Sources */,
 				26EDEDC32940333300487FAD /* UserPinView.swift in Sources */,
 				26EDEDB72940182200487FAD /* DragonRadarViewModel.swift in Sources */,
+				261D036229561D9400911487 /* DragonBallRadarInteractor.swift in Sources */,
 				26EDED8B293FC29600487FAD /* DragonBallApp.swift in Sources */,
 				26EDEDC82940347500487FAD /* DragonBall.swift in Sources */,
 			);
