@@ -13,16 +13,15 @@ protocol DragonRadarPresentationLogic {
     func viewDidInit()
     func directionChanged(angle: Double)
     func distanceChanged(distance: CGFloat)
+    func displayDragonBalls(dragonBalls: [DragonBall])
 }
 
 class DragonRadarViewModel: ObservableObject {
-    private var interactor: DragonBallRadarBussinessLogic
     private var audioPlayer: AVAudioPlayer!
     @Published var magneticHeading: CLLocationDirection
     @Published var dragonBalls = [DragonBall]()
     
-    init(interactor: DragonBallRadarBussinessLogic) {
-        self.interactor = interactor
+    init() {
         self.magneticHeading = CLLocationDirection()
     }
 
@@ -35,6 +34,10 @@ class DragonRadarViewModel: ObservableObject {
 }
 
 extension DragonRadarViewModel: DragonRadarPresentationLogic {
+    func displayDragonBalls(dragonBalls: [DragonBall]) {
+        self.dragonBalls = dragonBalls
+    }
+    
     func directionChanged(angle: Double) {
         magneticHeading = angle
     }
@@ -48,7 +51,6 @@ extension DragonRadarViewModel: DragonRadarPresentationLogic {
     }
     
     func viewDidInit() {
-        interactor.createAndTrackingDragonBalls()
         startBipSound()
     }
 }

@@ -13,7 +13,7 @@ protocol DragonBallRadarBussinessLogic {
 }
 
 class DragonBallRadarInteractor: NSObject {
-    private var viewModel: DragonRadarPresentationLogic?
+    var viewModel: DragonRadarPresentationLogic?
     private var locationManager: CLLocationManager
     var dragonBalls: [DragonBall]
 
@@ -81,6 +81,7 @@ extension DragonBallRadarInteractor: DragonBallRadarBussinessLogic {
             dragonBalls.append(DragonBall(location: dragonBallLocation, distance: distance, direction: 0))
         }
 
+        viewModel?.displayDragonBalls(dragonBalls: dragonBalls)
         startTrackingDragonBalls()
     }
 }

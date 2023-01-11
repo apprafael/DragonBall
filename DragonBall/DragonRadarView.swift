@@ -9,7 +9,8 @@ import SwiftUI
 import AVKit
 
 struct DragonRadarView: View {
-    @StateObject var viewModel = DragonRadarViewModel(interactor: DragonBallRadarInteractor())
+    var interector = DragonBallRadarInteractor()
+    @StateObject var viewModel = DragonRadarViewModel()
     var body: some View {
         ZStack(alignment: .center) {
             Color(.black)
@@ -38,7 +39,10 @@ struct DragonRadarView: View {
             .rotationEffect(.degrees(viewModel.magneticHeading))
         }
         .onAppear {
+            interector.viewModel = viewModel
+            interector.createAndTrackingDragonBalls()
             viewModel.viewDidInit()
+            
         }
     }
 }
