@@ -12,15 +12,26 @@ protocol DragonBallRadarBussinessLogic {
     func createAndTrackingDragonBalls()
 }
 
-class DragonBallRadarInteractor: NSObject {
+class DragonBallRadarInteractor: NSObject, DragonBallRadarBussinessLogic {
     var viewModel: DragonRadarPresentationLogic?
-    private var locationManager: CLLocationManager
     var dragonBalls: [DragonBall]
+    private var locationManager: CLLocationManager
+    private var dragonBallCountRange = 1...6
 
     override init() {
         self.locationManager = CLLocationManager()
         self.dragonBalls = [DragonBall]()
         super.init()
+    }
+
+    func createAndTrackingDragonBalls() {
+        guard let userLocation = locationManager.location else { return }
+        for _ in dragonBallCountRange {
+            dragonBalls.append(DragonBall(userLocation: userLocation))
+        }
+
+        viewModel?.displayDragonBalls(dragonBalls: dragonBalls)
+        startTrackingDragonBalls()
     }
 
     private func degreesToRadians(degrees: Double) -> Double {
@@ -57,7 +68,7 @@ class DragonBallRadarInteractor: NSObject {
         }
     }
     
-    private func trackingDragonBallDirection(magnecticHeading: CLLocationDirection) {
+    private func trackDirection(magnecticHeading: CLLocationDirection) {
         viewModel?.directionChanged(angle: magnecticHeading)
     }
 
@@ -70,25 +81,9 @@ class DragonBallRadarInteractor: NSObject {
     }
 }
 
-extension DragonBallRadarInteractor: DragonBallRadarBussinessLogic {
-    func createAndTrackingDragonBalls() {
-        guard let userLocation = locationManager.location else { return }
-        for _ in 1...6 {
-            let dragonBallLat = userLocation.coordinate.latitude + Double.random(in: -0.029999999999999...0.029999999999999)
-            let dragonBallLong = userLocation.coordinate.longitude + Double.random(in: -0.029999999999999...0.029999999999999)
-            let dragonBallLocation = CLLocation(latitude: dragonBallLat, longitude: dragonBallLong)
-            let distance = Int(dragonBallLocation.distance(from: userLocation)/10)
-            dragonBalls.append(DragonBall(location: dragonBallLocation, distance: distance, direction: 0))
-        }
-
-        viewModel?.displayDragonBalls(dragonBalls: dragonBalls)
-        startTrackingDragonBalls()
-    }
-}
-
 extension DragonBallRadarInteractor: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        trackingDragonBallDirection(magnecticHeading: newHeading.magneticHeading)
+        trackDirection(magnecticHeading: newHeading.magneticHeading)
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
