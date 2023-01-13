@@ -31,48 +31,14 @@ class DragonBallRadarInteractor: NSObject, DragonBallRadarBussinessLogic {
         }
 
         viewModel?.displayDragonBalls(dragonBalls: dragonBalls)
-        startTrackingDragonBalls()
+        startTracking()
     }
 
-    private func degreesToRadians(degrees: Double) -> Double {
-        degrees * .pi / 180.0
+    private func trackUserDirection(magnecticHeading: CLLocationDirection) {
+        viewModel?.directionChanged(angle: -magnecticHeading)
     }
 
-    private func radiansToDegrees(radians: Double) -> Double {
-        radians * 180.0 / .pi
-    }
-
-    private func getBearingBetweenTwoPoints1(point1 : CLLocation, point2 : CLLocation) -> Double {
-
-        let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
-        let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)
-
-        let lat2 = degreesToRadians(degrees: point2.coordinate.latitude)
-        let lon2 = degreesToRadians(degrees: point2.coordinate.longitude)
-
-        let dLon = lon2 - lon1
-
-        let y = sin(dLon) * cos(lat2)
-        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
-        let radiansBearing = atan2(y, x)
-
-        return radiansToDegrees(radians: radiansBearing)
-    }
-
-    private func trackingDragonBallDistance(userLocation: CLLocation) {
-        for (index, dragonBall) in dragonBalls.enumerated() {
-            let distance = Int(dragonBall.location.distance(from: userLocation)/10)
-            dragonBalls[index].distance = distance
-            let dragonBallDirection = getBearingBetweenTwoPoints1(point1: userLocation, point2: dragonBall.location)
-            dragonBalls[index].direction = dragonBallDirection
-        }
-    }
-    
-    private func trackDirection(magnecticHeading: CLLocationDirection) {
-        viewModel?.directionChanged(angle: magnecticHeading)
-    }
-
-    private func startTrackingDragonBalls() {
+    private func startTracking() {
         locationManager = CLLocationManager()
         locationManager.requestAlwaysAuthorization()
         locationManager.delegate = self
@@ -83,11 +49,11 @@ class DragonBallRadarInteractor: NSObject, DragonBallRadarBussinessLogic {
 
 extension DragonBallRadarInteractor: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        trackDirection(magnecticHeading: newHeading.magneticHeading)
+        trackUserDirection(magnecticHeading: newHeading.magneticHeading)
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let userLocation = manager.location else { return }
-        trackingDragonBallDistance(userLocation: userLocation)
+        dragonBalls.forEach { $0.locationChanged(userLocation: userLocation) }
     }
 }
