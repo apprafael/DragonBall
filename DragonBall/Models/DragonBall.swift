@@ -51,7 +51,7 @@ class DragonBall: Identifiable {
     }
 
     private func updateDirection(userLocation: CLLocation) {
-        direction = getBearingBetweenTwoPoints1(point1: userLocation, point2: location)
+        direction = getBearingBetweenTwoPoints1(point1: location, point2: userLocation)
     }
 
     func locationChanged(userLocation: CLLocation) {

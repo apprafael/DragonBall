@@ -38,7 +38,7 @@ struct DragonRadarView: View {
             }
             .rotationEffect(.degrees(viewModel.magneticHeading))
         }
-        .onAppear {
+        .onLoad {
             interector.viewModel = viewModel
             interector.createAndTrackingDragonBalls()
             viewModel.viewDidInit()
