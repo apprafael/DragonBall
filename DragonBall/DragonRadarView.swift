@@ -13,30 +13,9 @@ struct DragonRadarView: View {
     @StateObject var viewModel = DragonRadarViewModel()
     var body: some View {
         ZStack(alignment: .center) {
-            Color(.black)
-                .ignoresSafeArea()
-            VStack(spacing: 3) {
-                ForEach(0...20, id: \.self) {_ in
-                    HStack(spacing: 3) {
-                        ForEach(0...20, id: \.self) {_ in
-                            Rectangle()
-                                .fill(Color("radarbackground"))
-                                .aspectRatio(contentMode: .fill)
-                        }
-                    }
-                }
-            }
-            .ignoresSafeArea()
-            
+            background()
             UserPinView()
-            
-            ForEach(viewModel.dragonBalls) { dragonBall in
-                DragonBallView()
-                    .offset(y: CGFloat(dragonBall.distance))
-                    .rotationEffect(.degrees(dragonBall.direction))
-                
-            }
-            .rotationEffect(.degrees(viewModel.magneticHeading))
+            dragonBalls()
         }
         .onLoad {
             interector.viewModel = viewModel
@@ -44,6 +23,33 @@ struct DragonRadarView: View {
             viewModel.viewDidInit()
             
         }
+    }
+
+    @ViewBuilder private func background() -> some View {
+        Color(.black)
+            .ignoresSafeArea()
+        VStack(spacing: 3) {
+            ForEach(0...20, id: \.self) {_ in
+                HStack(spacing: 3) {
+                    ForEach(0...20, id: \.self) {_ in
+                        Rectangle()
+                            .fill(Color("radarbackground"))
+                            .aspectRatio(contentMode: .fill)
+                    }
+                }
+            }
+        }
+        .ignoresSafeArea()
+    }
+
+    private func dragonBalls() -> some View {
+        ForEach(viewModel.dragonBalls) { dragonBall in
+            DragonBallView()
+                .offset(y: CGFloat(dragonBall.distance))
+                .rotationEffect(.degrees(dragonBall.direction))
+            
+        }
+        .rotationEffect(.degrees(viewModel.magneticHeading))
     }
 }
 
