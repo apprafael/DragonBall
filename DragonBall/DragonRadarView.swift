@@ -17,11 +17,9 @@ struct DragonRadarView: View {
             UserPinView()
             dragonBalls()
         }
-        .onLoad {
+        .onAppear {
             interector.viewModel = viewModel
             interector.createAndTrackingDragonBalls()
-            viewModel.viewDidInit()
-            
         }
     }
 

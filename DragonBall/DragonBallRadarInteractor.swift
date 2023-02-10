@@ -14,23 +14,11 @@ protocol DragonBallRadarBussinessLogic {
 
 class DragonBallRadarInteractor: NSObject, DragonBallRadarBussinessLogic {
     var viewModel: DragonRadarPresentationLogic?
-    var dragonBalls: [DragonBall]
-    private var locationManager: CLLocationManager
+    var dragonBalls: [DragonBall] = []
+    private var locationManager: CLLocationManager = CLLocationManager()
     private var dragonBallCountRange = 1...6
 
-    override init() {
-        self.locationManager = CLLocationManager()
-        self.dragonBalls = [DragonBall]()
-        super.init()
-    }
-
     func createAndTrackingDragonBalls() {
-        guard let userLocation = locationManager.location else { return }
-        for _ in dragonBallCountRange {
-            dragonBalls.append(DragonBall(userLocation: userLocation))
-        }
-
-        viewModel?.displayDragonBalls(dragonBalls: dragonBalls)
         startTracking()
     }
 
@@ -39,15 +27,41 @@ class DragonBallRadarInteractor: NSObject, DragonBallRadarBussinessLogic {
     }
 
     private func startTracking() {
-        locationManager = CLLocationManager()
         locationManager.requestAlwaysAuthorization()
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
     }
+
+    private func createDragonBalls() {
+        guard let userLocation = locationManager.location else { return }
+        for _ in dragonBallCountRange {
+            dragonBalls.append(DragonBall(userLocation: userLocation))
+        }
+
+        viewModel?.displayDragonBalls(dragonBalls: dragonBalls)
+    }
 }
 
 extension DragonBallRadarInteractor: CLLocationManagerDelegate {
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse:  // Location services are available.
+            createDragonBalls()
+            break
+            
+        case .restricted, .denied:  // Location services currently unavailable.
+            break
+            
+        case .notDetermined:        // Authorization not determined yet.
+           manager.requestWhenInUseAuthorization()
+            break
+            
+        default:
+            break
+        }
+    }
+
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         trackUserDirection(magnecticHeading: newHeading.magneticHeading)
     }

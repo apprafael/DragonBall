@@ -10,7 +10,6 @@ import CoreLocation
 import AVKit
 
 protocol DragonRadarPresentationLogic {
-    func viewDidInit()
     func directionChanged(angle: Double)
     func distanceChanged(distance: CGFloat)
     func displayDragonBalls(dragonBalls: [DragonBall])
@@ -36,6 +35,7 @@ class DragonRadarViewModel: ObservableObject {
 extension DragonRadarViewModel: DragonRadarPresentationLogic {
     func displayDragonBalls(dragonBalls: [DragonBall]) {
         self.dragonBalls = dragonBalls
+        startBipSound()
     }
     
     func directionChanged(angle: Double) {
@@ -48,9 +48,5 @@ extension DragonRadarViewModel: DragonRadarPresentationLogic {
             dragonBall.distance = Int(distance)
             return dragonBall
         }
-    }
-    
-    func viewDidInit() {
-        startBipSound()
     }
 }
