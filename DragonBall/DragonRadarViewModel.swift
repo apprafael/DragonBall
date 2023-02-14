@@ -11,7 +11,6 @@ import AVKit
 
 protocol DragonRadarPresentationLogic {
     func directionChanged(angle: Double)
-    func distanceChanged(distance: CGFloat)
     func displayDragonBalls(dragonBalls: [DragonBall])
 }
 
@@ -40,13 +39,5 @@ extension DragonRadarViewModel: DragonRadarPresentationLogic {
     
     func directionChanged(angle: Double) {
         magneticHeading = angle
-    }
-    
-    func distanceChanged(distance: CGFloat) {
-        dragonBalls = dragonBalls.compactMap { dragonBall in
-            var dragonBall = dragonBall
-            dragonBall.distance = Int(distance)
-            return dragonBall
-        }
     }
 }

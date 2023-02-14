@@ -69,5 +69,6 @@ extension DragonBallRadarInteractor: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let userLocation = manager.location else { return }
         dragonBalls.forEach { $0.locationChanged(userLocation: userLocation) }
+        viewModel?.displayDragonBalls(dragonBalls: dragonBalls)
     }
 }
