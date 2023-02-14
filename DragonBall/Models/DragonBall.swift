@@ -8,13 +8,13 @@
 import Foundation
 import CoreLocation
 
-class DragonBall: Identifiable {
+class DragonBall: Identifiable, ObservableObject {
     let id = UUID()
     let location: CLLocation
-    var distance: Int
-    var direction: Double
-    let distanceRange =  -0.029999999999999...0.029999999999999
-    let directionRange = 0.0...360.0
+    @Published var distance: Int
+    @Published var direction: Double
+    private let distanceRange =  -0.029999999999999...0.029999999999999
+    private let directionRange = 0.0...360.0
     
     init(userLocation: CLLocation) {
         let dragonBallLat = userLocation.coordinate.latitude + Double.random(in: distanceRange)

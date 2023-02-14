@@ -42,9 +42,17 @@ struct DragonRadarView: View {
 
     private func dragonBalls() -> some View {
         ForEach(viewModel.dragonBalls) { dragonBall in
-            DragonBallView()
-                .offset(y: CGFloat(dragonBall.distance))
-                .rotationEffect(.degrees(dragonBall.direction))
+            VStack {
+                DragonBallView()
+
+                Text("Direction: \(dragonBall.direction)")
+                    .foregroundColor(.white)
+
+                Text("Distance: \(dragonBall.distance)")
+                    .foregroundColor(.white)
+            }
+            .offset(y: CGFloat(dragonBall.distance))
+            .rotationEffect(.degrees(dragonBall.direction))
             
         }
         .rotationEffect(.degrees(viewModel.magneticHeading))
