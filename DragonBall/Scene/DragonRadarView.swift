@@ -31,9 +31,9 @@ struct DragonRadarView: View {
         Color(.black)
             .ignoresSafeArea()
         VStack(spacing: 3) {
-            ForEach(0...20, id: \.self) {_ in
+            ForEach(0...10, id: \.self) {_ in
                 HStack(spacing: 3) {
-                    ForEach(0...20, id: \.self) {_ in
+                    ForEach(0...10, id: \.self) {_ in
                         Rectangle()
                             .fill(Color("radarbackground"))
                             .aspectRatio(contentMode: .fill)

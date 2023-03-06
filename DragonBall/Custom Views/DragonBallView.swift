@@ -11,9 +11,7 @@ struct DragonBallView: View {
     @State private var value = 1.0
     var body: some View {
         Circle()
-            .fill(
-                RadialGradient(gradient: Gradient(colors: [Color("dragonBall"), .yellow]), center: .center, startRadius: 5, endRadius: 30)
-            )
+            .fill(Color("dragonBall"))
             .frame(width: 30, height: 30)
             .shadow(color: .yellow, radius: 10)
             .opacity(value)
