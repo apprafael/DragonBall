@@ -18,7 +18,7 @@ class DragonRadarViewModel: ObservableObject {
     private var audioPlayer: AVAudioPlayer!
     @Published var magneticHeading: CLLocationDirection
     @Published var dragonBalls = [DragonBall]()
-    
+
     init() {
         self.magneticHeading = CLLocationDirection()
     }
@@ -36,7 +36,7 @@ extension DragonRadarViewModel: DragonRadarPresentationLogic {
         self.dragonBalls = dragonBalls
         startBipSound()
     }
-    
+
     func directionChanged(angle: Double) {
         magneticHeading = angle
     }

@@ -15,7 +15,7 @@ class DragonBall: Identifiable, ObservableObject {
     @Published var direction: Double
     private let distanceRange =  -0.003999999999999...0.003999999999999
     private let directionRange = 0.0...360.0
-    
+
     init(userLocation: CLLocation) {
         let dragonBallLat = userLocation.coordinate.latitude + Double.random(in: distanceRange)
         let dragonBallLong = userLocation.coordinate.longitude + Double.random(in: distanceRange)
@@ -33,7 +33,7 @@ class DragonBall: Identifiable, ObservableObject {
         radians * 180.0 / .pi
     }
 
-    private func getBearingBetweenTwoPoints1(point1 : CLLocation, point2 : CLLocation) -> Double {
+    private func getBearingBetweenTwoPoints1(point1: CLLocation, point2: CLLocation) -> Double {
 
         let lat1 = degreesToRadians(degrees: point1.coordinate.latitude)
         let lon1 = degreesToRadians(degrees: point1.coordinate.longitude)

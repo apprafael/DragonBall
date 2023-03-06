@@ -9,8 +9,11 @@ import SwiftUI
 import AVKit
 
 struct DragonRadarView: View {
-    var interector = DragonBallRadarInteractor()
-    @StateObject var viewModel = DragonRadarViewModel()
+    @StateObject
+    private var viewModel = DragonRadarViewModel()
+    private var interector = DragonBallRadarInteractor()
+    private let audioPlayer = AudioPlayer()
+
     var body: some View {
         ZStack(alignment: .center) {
             background()
@@ -20,6 +23,7 @@ struct DragonRadarView: View {
         .onAppear {
             interector.viewModel = viewModel
             interector.createAndTrackingDragonBalls()
+            audioPlayer.playAudioRepeatedly(filename: "beep")
         }
     }
 
@@ -44,18 +48,16 @@ struct DragonRadarView: View {
         ForEach(viewModel.dragonBalls) { dragonBall in
             VStack {
                 DragonBallView()
-
-                Text("Direction: \(dragonBall.direction)")
-                    .foregroundColor(.white)
-
-                Text("Distance: \(dragonBall.distance)")
-                    .foregroundColor(.white)
             }
             .offset(y: CGFloat(dragonBall.distance))
             .rotationEffect(.degrees(dragonBall.direction))
-            
+
         }
         .rotationEffect(.degrees(viewModel.magneticHeading))
+    }
+
+    private func startBeep() {
+
     }
 }
 

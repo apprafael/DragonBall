@@ -29,7 +29,7 @@ final class DragonBallTests: XCTestCase {
         dragonRadarViewModel?.dragonBalls.first?.locationChanged(userLocation: remoteLocation)
         let remoteDistance = dragonRadarViewModel?.dragonBalls.first?.distance
         XCTAssertTrue(remoteDistance ?? 0 > firstDistance ?? 0)
-        
+
     }
 
     func testDirection() {
@@ -40,7 +40,7 @@ final class DragonBallTests: XCTestCase {
         dragonRadarViewModel?.dragonBalls.first?.locationChanged(userLocation: remoteLocation)
         let remoteDirection = dragonRadarViewModel?.dragonBalls.first?.direction
         XCTAssertEqual(remoteDirection ?? 0 > -177.23208319717727, true)
-        
+
     }
 
     func testPerformanceExample() throws {

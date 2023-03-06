@@ -49,14 +49,14 @@ extension DragonBallRadarInteractor: CLLocationManagerDelegate {
         case .authorizedWhenInUse:  // Location services are available.
             createDragonBalls()
             break
-            
+
         case .restricted, .denied:  // Location services currently unavailable.
             break
-            
+
         case .notDetermined:        // Authorization not determined yet.
            manager.requestWhenInUseAuthorization()
             break
-            
+
         default:
             break
         }

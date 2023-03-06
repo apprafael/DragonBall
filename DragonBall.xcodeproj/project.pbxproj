@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		261D036229561D9400911487 /* DragonBallRadarInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261D036129561D9400911487 /* DragonBallRadarInteractor.swift */; };
-		265A12362971D13B008C15C6 /* ViewDidLoadModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265A12352971D13B008C15C6 /* ViewDidLoadModifier.swift */; };
-		265A12382971D160008C15C6 /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 265A12372971D160008C15C6 /* View+Extension.swift */; };
+		26AA918A29B58FF100A3C74A /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26AA918929B58FF100A3C74A /* AudioPlayer.swift */; };
+		26AA918E29B5988100A3C74A /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 26AA918D29B5988100A3C74A /* beep.mp3 */; };
 		26EDED8B293FC29600487FAD /* DragonBallApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EDED8A293FC29600487FAD /* DragonBallApp.swift */; };
 		26EDED8D293FC29600487FAD /* DragonRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26EDED8C293FC29600487FAD /* DragonRadarView.swift */; };
 		26EDED8F293FC29600487FAD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26EDED8E293FC29600487FAD /* Assets.xcassets */; };
@@ -43,8 +43,8 @@
 
 /* Begin PBXFileReference section */
 		261D036129561D9400911487 /* DragonBallRadarInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallRadarInteractor.swift; sourceTree = "<group>"; };
-		265A12352971D13B008C15C6 /* ViewDidLoadModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDidLoadModifier.swift; sourceTree = "<group>"; };
-		265A12372971D160008C15C6 /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		26AA918929B58FF100A3C74A /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		26AA918D29B5988100A3C74A /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		26D99E8B2947B229003E4A50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		26EDED87293FC29600487FAD /* DragonBall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DragonBall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26EDED8A293FC29600487FAD /* DragonBallApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragonBallApp.swift; sourceTree = "<group>"; };
@@ -88,6 +88,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26AA918729B58F8800A3C74A /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				261D036129561D9400911487 /* DragonBallRadarInteractor.swift */,
+				26EDEDB62940182200487FAD /* DragonRadarViewModel.swift */,
+				26EDED8C293FC29600487FAD /* DragonRadarView.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		26AA918829B58FC700A3C74A /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				26AA918D29B5988100A3C74A /* beep.mp3 */,
+				26AA918929B58FF100A3C74A /* AudioPlayer.swift */,
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
 		26EDED7E293FC29600487FAD = {
 			isa = PBXGroup;
 			children = (
@@ -114,12 +133,9 @@
 				26EDEDC62940346500487FAD /* Models */,
 				26EDEDC5294033FC00487FAD /* Shapes */,
 				26EDEDC42940338700487FAD /* Custom Views */,
-				26EDED8C293FC29600487FAD /* DragonRadarView.swift */,
-				26EDEDB62940182200487FAD /* DragonRadarViewModel.swift */,
+				26AA918729B58F8800A3C74A /* Scene */,
+				26AA918829B58FC700A3C74A /* AudioPlayer */,
 				26EDED8A293FC29600487FAD /* DragonBallApp.swift */,
-				261D036129561D9400911487 /* DragonBallRadarInteractor.swift */,
-				265A12352971D13B008C15C6 /* ViewDidLoadModifier.swift */,
-				265A12372971D160008C15C6 /* View+Extension.swift */,
 				26EDED9A293FC29700487FAD /* DragonBallTests */,
 				26EDED8E293FC29600487FAD /* Assets.xcassets */,
 				26EDED90293FC29600487FAD /* Preview Content */,
@@ -283,6 +299,7 @@
 			files = (
 				26EDED92293FC29600487FAD /* Preview Assets.xcassets in Resources */,
 				26EDED8F293FC29600487FAD /* Assets.xcassets in Resources */,
+				26AA918E29B5988100A3C74A /* beep.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,12 +326,11 @@
 			files = (
 				26EDEDB929401D2900487FAD /* DragonBallView.swift in Sources */,
 				26EDEDB5293FCB1B00487FAD /* Triangle.swift in Sources */,
-				265A12382971D160008C15C6 /* View+Extension.swift in Sources */,
+				26AA918A29B58FF100A3C74A /* AudioPlayer.swift in Sources */,
 				26EDED8D293FC29600487FAD /* DragonRadarView.swift in Sources */,
 				26EDEDC32940333300487FAD /* UserPinView.swift in Sources */,
 				26EDEDB72940182200487FAD /* DragonRadarViewModel.swift in Sources */,
 				261D036229561D9400911487 /* DragonBallRadarInteractor.swift in Sources */,
-				265A12362971D13B008C15C6 /* ViewDidLoadModifier.swift in Sources */,
 				26EDED8B293FC29600487FAD /* DragonBallApp.swift in Sources */,
 				26EDEDC82940347500487FAD /* DragonBall.swift in Sources */,
 			);
