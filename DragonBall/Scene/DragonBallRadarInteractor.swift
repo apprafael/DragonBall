@@ -28,6 +28,9 @@ class DragonBallRadarInteractor: NSObject, DragonBallRadarBussinessLogic {
 
     private func startTracking() {
         locationManager.requestAlwaysAuthorization()
+        if locationManager.authorizationStatus == .authorizedAlways || locationManager.authorizationStatus == .authorizedWhenInUse {
+            createDragonBalls()
+        }
         locationManager.delegate = self
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
