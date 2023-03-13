@@ -19,24 +19,28 @@ class DragonBallRadarInteractor: NSObject, DragonBallRadarBussinessLogic {
     private var dragonBallCountRange = 1...6
 
     func createAndTrackingDragonBalls() {
-        startTracking()
+        locationManager.delegate = self
+        
+        askLocationPermissionIfNeeded()
     }
 
     private func trackUserDirection(magnecticHeading: CLLocationDirection) {
         viewModel?.directionChanged(angle: -magnecticHeading)
     }
-
-    private func startTracking() {
-        locationManager.requestAlwaysAuthorization()
-        if locationManager.authorizationStatus == .authorizedAlways || locationManager.authorizationStatus == .authorizedWhenInUse {
-            createDragonBalls()
+    
+    private func askLocationPermissionIfNeeded() {
+        let status = locationManager.authorizationStatus
+        if status == .authorizedAlways || status == .authorizedWhenInUse {
+            startTrackingAndCreateDragonBalls()
+        } else {
+            locationManager.requestAlwaysAuthorization()
         }
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
-        locationManager.startUpdatingHeading()
     }
 
-    private func createDragonBalls() {
+    private func startTrackingAndCreateDragonBalls() {
+        locationManager.startUpdatingLocation()
+        locationManager.startUpdatingHeading()
+        
         guard let userLocation = locationManager.location else { return }
         for _ in dragonBallCountRange {
             dragonBalls.append(DragonBall(userLocation: userLocation))
@@ -50,7 +54,7 @@ extension DragonBallRadarInteractor: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse:  // Location services are available.
-            createDragonBalls()
+            startTrackingAndCreateDragonBalls()
             break
 
         case .restricted, .denied:  // Location services currently unavailable.
